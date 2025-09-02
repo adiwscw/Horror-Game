@@ -1,0 +1,75 @@
+[gd_scene load_steps=9 format=3 uid="uid://cp3cebf3naf5r"]
+
+[ext_resource type="Script" path="res://RigidBody3D.gd" id="1_qiqha"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lcl4e"]
+sky_horizon_color = Color(0.674681, 0.710559, 0.756127, 1)
+ground_bottom_color = Color(0.313726, 0.388235, 0.47451, 1)
+ground_horizon_color = Color(0.674681, 0.710559, 0.756127, 1)
+
+[sub_resource type="Sky" id="Sky_3dqit"]
+sky_material = SubResource("ProceduralSkyMaterial_lcl4e")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_iv71o"]
+background_mode = 2
+background_color = Color(0.854902, 0.364706, 0.0352941, 1)
+background_energy_multiplier = 0.0
+sky = SubResource("Sky_3dqit")
+ambient_light_energy = 3.28
+tonemap_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_owkxy"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4l082"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oh4fx"]
+size = Vector3(8, 0.1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cy8cb"]
+size = Vector3(8, 0.1, 100)
+
+[node name="Outside house" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iv71o")
+
+[node name="Player body" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365609, 0.738399, -1.56342)
+mass = 80.31
+gravity_scale = 0.342
+script = ExtResource("1_qiqha")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9455, 0)
+mesh = SubResource("CapsuleMesh_owkxy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player body"]
+shape = SubResource("CapsuleShape3D_4l082")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10028, 0.728999, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0229309, 0.0793971, -0.0586887)
+shape = SubResource("BoxShape3D_oh4fx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_cy8cb")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="Sun Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.574499, -0.778977, -0.251288, -0.774992, -0.616456, 0.139173, -0.263321, 0.114792, -0.957854, -45.819, 4.027, -175.155)
+light_color = Color(0.996078, 0.737255, 0.611765, 1)
+light_energy = 3.828
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_opacity = 0.52
+shadow_blur = 0.166
+directional_shadow_max_distance = 72.8
