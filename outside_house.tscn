@@ -1,6 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://cp3cebf3naf5r"]
+[gd_scene load_steps=13 format=3 uid="uid://cp3cebf3naf5r"]
 
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_qiqha"]
+[ext_resource type="Texture2D" uid="uid://yikn3q6ygghr" path="res://Textures/asphalt_02_diff_4k.png" id="2_p23cm"]
+[ext_resource type="Texture2D" uid="uid://bqr7l14birakp" path="res://Textures/asphalt_02_nor_gl_4k.png" id="3_62ksa"]
+[ext_resource type="Texture2D" uid="uid://ds02nbwkbsfwv" path="res://Textures/asphalt_02_rough_4k.png" id="4_yv3st"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lcl4e"]
 sky_horizon_color = Color(0.674681, 0.710559, 0.756127, 1)
@@ -30,8 +33,16 @@ height = 1.8
 [sub_resource type="BoxShape3D" id="BoxShape3D_oh4fx"]
 size = Vector3(8, 0.1, 100)
 
-[sub_resource type="BoxMesh" id="BoxMesh_cy8cb"]
-size = Vector3(8, 0.1, 100)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chgm0"]
+albedo_texture = ExtResource("2_p23cm")
+roughness_texture = ExtResource("4_yv3st")
+normal_enabled = true
+normal_texture = ExtResource("3_62ksa")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_oycqg"]
+material = SubResource("StandardMaterial3D_chgm0")
+size = Vector2(8, 8)
 
 [node name="Outside house" type="Node3D"]
 
@@ -39,7 +50,7 @@ size = Vector3(8, 0.1, 100)
 environment = SubResource("Environment_iv71o")
 
 [node name="Player body" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365609, 0.738399, -1.56342)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365609, 0.0912424, -1.56342)
 mass = 80.31
 gravity_scale = 0.342
 script = ExtResource("1_qiqha")
@@ -52,18 +63,26 @@ mesh = SubResource("CapsuleMesh_owkxy")
 shape = SubResource("CapsuleShape3D_4l082")
 
 [node name="Floor" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.10028, 0.728999, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0229309, 0.0793971, -0.0586887)
 shape = SubResource("BoxShape3D_oh4fx")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-mesh = SubResource("BoxMesh_cy8cb")
-skeleton = NodePath("../CollisionShape3D")
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 0.277743, -16)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -8)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("QuadMesh_oycqg")
 
 [node name="Sun Light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.574499, -0.778977, -0.251288, -0.774992, -0.616456, 0.139173, -0.263321, 0.114792, -0.957854, -45.819, 4.027, -175.155)
+transform = Transform3D(-0.11024, 0.99162, -0.0673534, -0.985199, -0.100073, 0.139173, 0.131267, 0.0816989, 0.987975, -9.42667, 4.027, 136.35)
 light_color = Color(0.996078, 0.737255, 0.611765, 1)
 light_energy = 3.828
 light_indirect_energy = 0.0

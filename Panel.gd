@@ -6,7 +6,6 @@ extends Panel
 func _input(event):
 	if event.is_action_pressed("Start"):
 		hide()  
-		get_node("anim").play("Paper Slide")      
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
