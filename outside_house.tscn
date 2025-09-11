@@ -1,17 +1,16 @@
-[gd_scene load_steps=13 format=3 uid="uid://cp3cebf3naf5r"]
+[gd_scene load_steps=14 format=3 uid="uid://cp3cebf3naf5r"]
 
+[ext_resource type="Texture2D" uid="uid://qlijjfxcl2la" path="res://Textures/panoramic-view-beach-sunset.jpg" id="1_jec86"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_qiqha"]
 [ext_resource type="Texture2D" uid="uid://yikn3q6ygghr" path="res://Textures/asphalt_02_diff_4k.png" id="2_p23cm"]
 [ext_resource type="Texture2D" uid="uid://bqr7l14birakp" path="res://Textures/asphalt_02_nor_gl_4k.png" id="3_62ksa"]
 [ext_resource type="Texture2D" uid="uid://ds02nbwkbsfwv" path="res://Textures/asphalt_02_rough_4k.png" id="4_yv3st"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lcl4e"]
-sky_horizon_color = Color(0.674681, 0.710559, 0.756127, 1)
-ground_bottom_color = Color(0.313726, 0.388235, 0.47451, 1)
-ground_horizon_color = Color(0.674681, 0.710559, 0.756127, 1)
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v7xnr"]
+panorama = ExtResource("1_jec86")
 
 [sub_resource type="Sky" id="Sky_3dqit"]
-sky_material = SubResource("ProceduralSkyMaterial_lcl4e")
+sky_material = SubResource("PanoramaSkyMaterial_v7xnr")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_iv71o"]
@@ -50,13 +49,12 @@ size = Vector2(8, 8)
 environment = SubResource("Environment_iv71o")
 
 [node name="Player body" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.365609, 0.0912424, -1.56342)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97599, 1.37475, 2.55262)
 mass = 80.31
 gravity_scale = 0.342
 script = ExtResource("1_qiqha")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Player body"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9455, 0)
 mesh = SubResource("CapsuleMesh_owkxy")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player body"]
@@ -65,15 +63,51 @@ shape = SubResource("CapsuleShape3D_4l082")
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0)
 shape = SubResource("BoxShape3D_oh4fx")
 
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.0871558, 0.996195, 0, -0.996195, 0.0871558, 0, 2.14862, -47.8724)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 1.5347, -39.9046)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 0.977088, -31.9251)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 0.277743, -16)
+transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 0.419358, -23.9433)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0.00122833, 0.0662477, -15.9903)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -8)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 24)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 16)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 8)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
