@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://h74qx0flisn3"]
+[gd_scene load_steps=46 format=3 uid="uid://h74qx0flisn3"]
 
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_2jktg"]
 [ext_resource type="Script" path="res://Space_Play_Text.gd" id="1_fkxpu"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://br3wbhe4jonvh" path="res://Blender assets/Mug.glb" id="8_iwoqg"]
 [ext_resource type="Texture2D" uid="uid://2wrt431gkrtf" path="res://Textures/Untitled design (12).png" id="9_aje5j"]
 [ext_resource type="Script" path="res://paper_slide_animation.gd" id="10_lrjav"]
+[ext_resource type="PackedScene" uid="uid://dkrm3hx4waflk" path="res://Assets/Boss.blend" id="13_hep4i"]
 
 [sub_resource type="Theme" id="Theme_ujv3o"]
 
@@ -402,7 +403,7 @@ mesh = SubResource("CapsuleMesh_avua6")
 shape = SubResource("CapsuleShape3D_h3d42")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, -0.00826733, 2.03418, -1.22291)
+transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, -0.0296566, 1.93249, -1.26871)
 fov = 72.0
 
 [node name="Window wall blend" type="Node3D" parent="."]
@@ -463,3 +464,6 @@ script = ExtResource("10_lrjav")
 libraries = {
 "": SubResource("AnimationLibrary_h4456")
 }
+
+[node name="Boss" parent="." instance=ExtResource("13_hep4i")]
+transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 1.41566, 0.119441, 0.636677)
