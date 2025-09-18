@@ -6,15 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://ds02nbwkbsfwv" path="res://Textures/asphalt_02_rough_4k.png" id="4_yv3st"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7uwk5"]
-sky_top_color = Color(0.737255, 0.486275, 0.827451, 1)
-sky_horizon_color = Color(1, 0.333333, 0.164706, 1)
-sky_curve = 0.243676
+sky_top_color = Color(0.423529, 0.278431, 0.631373, 1)
+sky_horizon_color = Color(1, 0.352941, 0.192157, 1)
+sky_curve = 0.150001
 sky_energy_multiplier = 1.2
 ground_bottom_color = Color(0.2, 0.168627, 0.133333, 1)
 ground_curve = 3.40059e-05
 ground_energy_multiplier = 3.94
-sun_angle_max = 8.74
-sun_curve = 0.702399
+sun_angle_max = 3.72
+sun_curve = 11.2384
 
 [sub_resource type="Sky" id="Sky_3dqit"]
 sky_material = SubResource("ProceduralSkyMaterial_7uwk5")
