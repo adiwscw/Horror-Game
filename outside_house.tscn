@@ -1,25 +1,35 @@
 [gd_scene load_steps=14 format=3 uid="uid://cp3cebf3naf5r"]
 
-[ext_resource type="Texture2D" uid="uid://qlijjfxcl2la" path="res://Textures/panoramic-view-beach-sunset.jpg" id="1_jec86"]
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_qiqha"]
+[ext_resource type="Texture2D" uid="uid://3irboplhnw67" path="res://Textures/Afternoon_Sky.png" id="1_svnm3"]
 [ext_resource type="Texture2D" uid="uid://yikn3q6ygghr" path="res://Textures/asphalt_02_diff_4k.png" id="2_p23cm"]
 [ext_resource type="Texture2D" uid="uid://bqr7l14birakp" path="res://Textures/asphalt_02_nor_gl_4k.png" id="3_62ksa"]
 [ext_resource type="Texture2D" uid="uid://ds02nbwkbsfwv" path="res://Textures/asphalt_02_rough_4k.png" id="4_yv3st"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_v7xnr"]
-panorama = ExtResource("1_jec86")
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nf6dl"]
+panorama = ExtResource("1_svnm3")
 
 [sub_resource type="Sky" id="Sky_3dqit"]
-sky_material = SubResource("PanoramaSkyMaterial_v7xnr")
+sky_material = SubResource("PanoramaSkyMaterial_nf6dl")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_iv71o"]
 background_mode = 2
 background_color = Color(0.854902, 0.364706, 0.0352941, 1)
-background_energy_multiplier = 0.0
+background_energy_multiplier = 1.63
 sky = SubResource("Sky_3dqit")
-ambient_light_energy = 3.28
+sky_rotation = Vector3(0, -4.39823, 0)
+ambient_light_color = Color(0.811765, 0.376471, 0.278431, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.0
 tonemap_mode = 2
+tonemap_white = 16.0
+glow_strength = 1.48
+fog_enabled = true
+fog_light_color = Color(0.72549, 0.662745, 0.670588, 1)
+fog_light_energy = 0.65
+fog_density = 0.001
+adjustment_brightness = 2.09
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_owkxy"]
 radius = 0.35
@@ -49,7 +59,7 @@ size = Vector2(8, 8)
 environment = SubResource("Environment_iv71o")
 
 [node name="Player body" type="RigidBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97599, 1.37475, 2.55262)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.97599, 0.87846, 2.55262)
 mass = 80.31
 gravity_scale = 0.342
 script = ExtResource("1_qiqha")
@@ -60,69 +70,88 @@ mesh = SubResource("CapsuleMesh_owkxy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player body"]
 shape = SubResource("CapsuleShape3D_4l082")
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Road" type="StaticBody3D" parent="."]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0)
 shape = SubResource("BoxShape3D_oh4fx")
 
-[node name="MeshInstance3D8" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 0.0871558, 0.996195, 0, -0.996195, 0.0871558, 0, 2.14862, -47.8724)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 1.5347, -39.9046)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 0.977088, -31.9251)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 0.0697565, 0.997564, 0, -0.997564, 0.0697565, 0, 0.419358, -23.9433)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 0.0174524, 0.999848, 0, -0.999848, 0.0174524, 0.00122833, 0.0662477, -15.9903)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, -8)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D11" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.0871558, 0.996195, 0, -0.996195, 0.0871558, 0, -1.18432, 47.8561)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.104528, 0.994522, 0, -0.994522, 0.104528, -0.000187159, -0.418669, 39.9545)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 32)
+mesh = SubResource("QuadMesh_oycqg")
+skeleton = NodePath("../MeshInstance3D2")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 24)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D10" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 16)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D9" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 8)
 mesh = SubResource("QuadMesh_oycqg")
 skeleton = NodePath("../MeshInstance3D2")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Floor"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_oycqg")
 
 [node name="Sun Light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.11024, 0.99162, -0.0673534, -0.985199, -0.100073, 0.139173, 0.131267, 0.0816989, 0.987975, -9.42667, 4.027, 136.35)
-light_color = Color(0.996078, 0.737255, 0.611765, 1)
-light_energy = 3.828
+transform = Transform3D(-0.105543, 0.992097, -0.0678496, -0.992457, -0.100811, 0.0697565, 0.0623653, 0.0747002, 0.995254, -194.032, 3.91253, 3800.86)
+light_color = Color(1, 0.541176, 0.301961, 1)
+light_energy = 5.51
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
 shadow_enabled = true
 shadow_bias = 0.0
-shadow_opacity = 0.52
+shadow_opacity = 0.61
 shadow_blur = 0.166
 directional_shadow_max_distance = 72.8
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
