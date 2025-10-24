@@ -1,18 +1,20 @@
-[gd_scene load_steps=46 format=3 uid="uid://h74qx0flisn3"]
+[gd_scene load_steps=50 format=3 uid="uid://h74qx0flisn3"]
 
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_2jktg"]
 [ext_resource type="Script" path="res://Space_Play_Text.gd" id="1_fkxpu"]
 [ext_resource type="Script" path="res://Panel.gd" id="1_ids3m"]
-[ext_resource type="Texture2D" uid="uid://68ak4hpvlo5i" path="res://Textures/Untitled design (11).png" id="1_jwjea"]
-[ext_resource type="Texture2D" uid="uid://bni4tnf3r82ew" path="res://Textures/Untitled design (2).png" id="1_kb2ia"]
-[ext_resource type="PackedScene" uid="uid://d3axsrgpk3cjd" path="res://Blender assets/light ray thingy.glb" id="1_syntu"]
-[ext_resource type="Texture2D" uid="uid://jn21ljmmyomf" path="res://Textures/Untitled design (8).png" id="4_1oaxt"]
-[ext_resource type="Texture2D" uid="uid://btnd27cclgykk" path="res://Textures/Untitled design (9).png" id="4_n7dnm"]
-[ext_resource type="Texture2D" uid="uid://c70e2csofp45c" path="res://Textures/Untitled design (14).png" id="6_26mg2"]
-[ext_resource type="PackedScene" uid="uid://br3wbhe4jonvh" path="res://Blender assets/Mug.glb" id="8_iwoqg"]
-[ext_resource type="Texture2D" uid="uid://2wrt431gkrtf" path="res://Textures/Untitled design (12).png" id="9_aje5j"]
+[ext_resource type="Texture2D" uid="uid://dwpi2pr0lboqn" path="res://Textures/Untitled design (11).png" id="1_jwjea"]
+[ext_resource type="Texture2D" uid="uid://byexgychk0qnp" path="res://Textures/Untitled design (2).png" id="1_kb2ia"]
+[ext_resource type="PackedScene" uid="uid://dgna0wl3wjaqj" path="res://Blender assets/light ray thingy.glb" id="1_syntu"]
+[ext_resource type="Texture2D" uid="uid://c4aaiyxj5gbnm" path="res://Textures/Untitled design (8).png" id="4_1oaxt"]
+[ext_resource type="Texture2D" uid="uid://drynkfn0iyn7v" path="res://Textures/Untitled design (9).png" id="4_n7dnm"]
+[ext_resource type="Texture2D" uid="uid://bhwv2yfr46428" path="res://Textures/Untitled design (14).png" id="6_26mg2"]
+[ext_resource type="PackedScene" uid="uid://hrbjt526u2xo" path="res://Blender assets/Mug.glb" id="8_iwoqg"]
+[ext_resource type="Texture2D" uid="uid://c547yfp0q867g" path="res://Textures/Untitled design (12).png" id="9_aje5j"]
 [ext_resource type="Script" path="res://paper_slide_animation.gd" id="10_lrjav"]
-[ext_resource type="PackedScene" uid="uid://dkrm3hx4waflk" path="res://Assets/Boss.blend" id="13_hep4i"]
+[ext_resource type="PackedScene" uid="uid://5i6cyexe0ivw" path="res://Assets/Boss.blend" id="13_hep4i"]
+[ext_resource type="Script" path="res://Paper Slide.gd" id="13_yuulw"]
+[ext_resource type="FontFile" uid="uid://bpyq2cjart6ql" path="res://Assets/ShadowsIntoLightTwo-Regular.ttf" id="15_fo0rk"]
 
 [sub_resource type="Theme" id="Theme_ujv3o"]
 
@@ -192,9 +194,12 @@ albedo_texture = ExtResource("9_aje5j")
 [sub_resource type="BoxMesh" id="BoxMesh_0rggk"]
 size = Vector3(0.4, 0, 0.5)
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_sc6vb"]
+viewport_path = NodePath("SubViewport")
+
 [sub_resource type="Animation" id="Animation_ugb27"]
 resource_name = "Paper Slide"
-length = 3.0
+length = 5.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -214,11 +219,18 @@ tracks/1/path = NodePath("../../Camera3D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.5, 2.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.6, 1.5, 2.4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(-0.174533, -3.14159, 0), Vector3(-0.261799, -3.14159, 0), Vector3(-0.453786, -3.14159, 0), Vector3(-0.872665, -3.14159, 0)]
+"values": [Vector3(-0.174533, -3.14159, 0), Vector3(-0.261799, -3.14159, 0), Vector3(-0.453786, -3.14159, 0), Vector3(-0.872665, -3.14159, 0), Vector3(-1.39403, -3.14158, -7.18056e-06)]
 }
+tracks/2/type = "position_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Camera3D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(2.9, 1, 0, 1.82761, -1.14375, 4.5, 1, 0, 1.85822, -0.831885, 5.5, 1, 0, 1.59, -0.832)
 
 [sub_resource type="Animation" id="Animation_wkur3"]
 length = 0.001
@@ -253,6 +265,10 @@ _data = {
 "RESET": SubResource("Animation_wkur3")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_dqh56"]
+font = ExtResource("15_fo0rk")
+font_color = Color(0, 0, 0, 1)
+
 [node name="Main" type="Node3D"]
 
 [node name="Panel" type="Panel" parent="."]
@@ -272,10 +288,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 740.0
-offset_top = 490.0
-offset_right = 1212.01
-offset_bottom = 555.004
+offset_left = 164.0
+offset_top = 166.0
+offset_right = 636.01
+offset_bottom = 231.004
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
@@ -403,7 +419,7 @@ mesh = SubResource("CapsuleMesh_avua6")
 shape = SubResource("CapsuleShape3D_h3d42")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, -0.0296566, 1.93249, -1.26871)
+transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, 0, 1.54825, -0.831885)
 fov = 72.0
 
 [node name="Window wall blend" type="Node3D" parent="."]
@@ -460,10 +476,28 @@ mesh = SubResource("BoxMesh_0rggk")
 skeleton = NodePath("../..")
 script = ExtResource("10_lrjav")
 
+[node name="Sprite3D" type="Sprite3D" parent="Paper/paper"]
+transform = Transform3D(-0.3, -4.52987e-08, -1.98007e-15, 0, -1.31134e-08, 0.3, -4.52987e-08, 0.3, 1.31134e-08, -0.180717, 0.000830054, -0.537243)
+texture = SubResource("ViewportTexture_sc6vb")
+
 [node name="Paper Slide" type="AnimationPlayer" parent="Paper/paper"]
 libraries = {
 "": SubResource("AnimationLibrary_h4456")
 }
+script = ExtResource("13_yuulw")
 
 [node name="Boss" parent="." instance=ExtResource("13_hep4i")]
 transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 1.41566, 0.119441, 0.636677)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+
+[node name="Label" type="Label" parent="SubViewport"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "                     Your Job
+                  Play
+                  Settings
+                  Credits
+                  Leave"
+label_settings = SubResource("LabelSettings_dqh56")

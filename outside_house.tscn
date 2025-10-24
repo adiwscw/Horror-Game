@@ -1,11 +1,11 @@
 [gd_scene load_steps=22 format=3 uid="uid://cp3cebf3naf5r"]
 
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_qiqha"]
-[ext_resource type="Texture2D" uid="uid://3irboplhnw67" path="res://Textures/Afternoon_Sky.png" id="1_svnm3"]
-[ext_resource type="Texture2D" uid="uid://yikn3q6ygghr" path="res://Textures/asphalt_02_diff_4k.png" id="2_p23cm"]
-[ext_resource type="Texture2D" uid="uid://bqr7l14birakp" path="res://Textures/asphalt_02_nor_gl_4k.png" id="3_62ksa"]
-[ext_resource type="Texture2D" uid="uid://ds02nbwkbsfwv" path="res://Textures/asphalt_02_rough_4k.png" id="4_yv3st"]
-[ext_resource type="PackedScene" uid="uid://dpkl0hl2ncmqg" path="res://Assets/truck.blend" id="6_bbofb"]
+[ext_resource type="Texture2D" uid="uid://bgymwp0uxgf5r" path="res://Textures/Afternoon_Sky.png" id="1_svnm3"]
+[ext_resource type="Texture2D" uid="uid://cpkxgvhc53lj2" path="res://Textures/asphalt_02_diff_4k.png" id="2_p23cm"]
+[ext_resource type="Texture2D" uid="uid://bhlauic1xeytd" path="res://Textures/asphalt_02_nor_gl_4k.png" id="3_62ksa"]
+[ext_resource type="Texture2D" uid="uid://eygc6qxj7yhk" path="res://Textures/asphalt_02_rough_4k.png" id="4_yv3st"]
+[ext_resource type="PackedScene" uid="uid://b2f7fx538n1ds" path="res://Assets/truck.blend" id="6_bbofb"]
 [ext_resource type="Texture2D" uid="uid://bu5s2f2emqujw" path="res://Textures/City_Sidewalk_Cement_Texture.jpg" id="7_c4e4b"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nf6dl"]
@@ -40,20 +40,6 @@ height = 1.8
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4l082"]
 radius = 0.35
 height = 1.8
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_oh4fx"]
-size = Vector3(8, 0.1, 100)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chgm0"]
-albedo_texture = ExtResource("2_p23cm")
-roughness_texture = ExtResource("4_yv3st")
-normal_enabled = true
-normal_texture = ExtResource("3_62ksa")
-uv1_scale = Vector3(2, 2, 2)
-
-[sub_resource type="QuadMesh" id="QuadMesh_oycqg"]
-material = SubResource("StandardMaterial3D_chgm0")
-size = Vector2(8, 8)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_twjc5"]
 
@@ -96,6 +82,20 @@ shadow_mesh = SubResource("ArrayMesh_hpbbm")
 
 [sub_resource type="Skin" id="Skin_yh3tc"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_oh4fx"]
+size = Vector3(8, 0.1, 100)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chgm0"]
+albedo_texture = ExtResource("2_p23cm")
+roughness_texture = ExtResource("4_yv3st")
+normal_enabled = true
+normal_texture = ExtResource("3_62ksa")
+uv1_scale = Vector3(2, 2, 2)
+
+[sub_resource type="QuadMesh" id="QuadMesh_oycqg"]
+material = SubResource("StandardMaterial3D_chgm0")
+size = Vector2(8, 8)
+
 [node name="Outside house" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -113,7 +113,254 @@ mesh = SubResource("CapsuleMesh_owkxy")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player body"]
 shape = SubResource("CapsuleShape3D_4l082")
 
+[node name="Sun Light" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.105543, 0.992097, -0.0678496, -0.992457, -0.100811, 0.0697565, 0.0623653, 0.0747002, 0.995254, -194.032, 3.91253, 3800.86)
+light_color = Color(1, 0.541176, 0.301961, 1)
+light_energy = 5.51
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_opacity = 0.61
+shadow_blur = 0.166
+directional_shadow_max_distance = 72.8
+
+[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
+
+[node name="truck" parent="." instance=ExtResource("6_bbofb")]
+transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -2.35793, 1.62539, 3.27466)
+
 [node name="Road" type="StaticBody3D" parent="."]
+
+[node name="Curb 14" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 23.5973)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 14"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 14"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 14"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 14"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08824)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 14"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0964064)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 14"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.9)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 15" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.4834)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 15"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 15"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 15"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 15"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08824)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 15"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0964064)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 15"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.9)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 10" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5.90784)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 10"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 10"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 10"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 10"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 10"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 10"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 11" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11.7939)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 11"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 11"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 11"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 11"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08824)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 11"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0964064)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 11"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.9)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 12" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 17.6799)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 12"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 12"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 12"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 12"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08824)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 12"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0964064)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 12"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.9)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Road"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.04, 0)
@@ -183,108 +430,413 @@ skeleton = NodePath("../MeshInstance3D2")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("QuadMesh_oycqg")
 
-[node name="Sun Light" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.105543, 0.992097, -0.0678496, -0.992457, -0.100811, 0.0697565, 0.0623653, 0.0747002, 0.995254, -194.032, 3.91253, 3800.86)
-light_color = Color(1, 0.541176, 0.301961, 1)
-light_energy = 5.51
-light_indirect_energy = 0.0
-light_volumetric_fog_energy = 0.0
-shadow_enabled = true
-shadow_bias = 0.0
-shadow_opacity = 0.61
-shadow_blur = 0.166
-directional_shadow_max_distance = 72.8
-
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="."]
-
-[node name="truck" parent="." instance=ExtResource("6_bbofb")]
-transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, -2.35793, 1.62539, 3.27466)
-
-[node name="Curb 2" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.88604)
+[node name="Curb 9" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.996195, -0.0871558, 0, 0.0871558, 0.996195, -0.024266, 2.09754, -47.2237)
 physics_material_override = SubResource("PhysicsMaterial_twjc5")
 
-[node name="Cube5" type="MeshInstance3D" parent="Curb 2"]
-transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 9"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube6" type="MeshInstance3D" parent="Curb 2"]
-transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 9"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube7" type="MeshInstance3D" parent="Curb 2"]
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 9"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube4" type="MeshInstance3D" parent="Curb 2"]
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 9"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 9"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 9"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 8" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, -0.0697565, 0, 0.0697565, 0.997564, -0.01, 1.6138, -41.3203)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 8"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 8"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 8"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 8"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 8"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 8"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 7" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, -0.0697565, 0, 0.0697565, 0.997564, -0.01, 1.204, -35.485)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 7"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 7"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 7"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 7"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 7"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 7"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 6" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, -0.0697565, 0, 0.0697565, 0.997564, -0.01, 0.79, -29.57)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 6"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 6"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 6"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 6"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 6"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 6"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 5" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, -0.0697565, 0, 0.0697565, 0.997564, -0.0104086, 0.338721, -23.6487)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 5"]
+transform = Transform3D(0.118, 0, 0, 0, 0.0780001, -1.11759e-08, 0, 1.86265e-09, 0.5, -4.135, 0.114611, 1.86406)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 5"]
+transform = Transform3D(0.118, 0, 0, 0, 0.0779525, 0.0174498, 0, -0.00272216, 0.499696, -4.12875, 0.131462, 3.85314)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 5"]
+transform = Transform3D(0.118, 0, 0, 0, 0.0780001, -1.11759e-08, 0, 1.86265e-09, 0.5, -4.135, 0.114612, 2.85989)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 5"]
+transform = Transform3D(0.118, 0, 0, 0, 0.0780001, -1.11759e-08, 0, 1.86265e-09, 0.5, -4.135, 0.114612, -1.09112)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 5"]
+transform = Transform3D(0.118, 0, 0, 0, 0.0780001, -1.11759e-08, 0, 1.86265e-09, 0.5, -4.135, 0.114611, -0.0992947)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 5"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, -1.11759e-08, 0, 0, 0.5, -4.135, 0.114611, 0.897116)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 4" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 0.999848, -0.0174524, 0, 0.0174524, 0.999848, 0, 0.0758982, -17.7046)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 4"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 4"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 4"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 4"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 4"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 4"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 3" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11.7721)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 3"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86669)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 3"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86252)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 3"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 3"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08849)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 3"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0966587)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 3"]
+transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.899747)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Curb 2" type="StaticBody3D" parent="Road"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.88604)
+physics_material_override = SubResource("PhysicsMaterial_twjc5")
+
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 2"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 2"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 2"]
+transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
+material_override = SubResource("StandardMaterial3D_bmq0p")
+mesh = SubResource("ArrayMesh_jlgq7")
+skin = SubResource("Skin_yh3tc")
+skeleton = NodePath("")
+
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 2"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08824)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube3" type="MeshInstance3D" parent="Curb 2"]
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 2"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0964064)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube2" type="MeshInstance3D" parent="Curb 2"]
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 2"]
 transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.9)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Curb 1" type="StaticBody3D" parent="."]
+[node name="Curb 1" type="StaticBody3D" parent="Road"]
 physics_material_override = SubResource("PhysicsMaterial_twjc5")
 
-[node name="Cube5" type="MeshInstance3D" parent="Curb 1"]
+[node name="Cube5" type="MeshInstance3D" parent="Road/Curb 1"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 1.86694)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube6" type="MeshInstance3D" parent="Curb 1"]
+[node name="Cube6" type="MeshInstance3D" parent="Road/Curb 1"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 2.86277)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube7" type="MeshInstance3D" parent="Curb 1"]
+[node name="Cube7" type="MeshInstance3D" parent="Road/Curb 1"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, 3.85695)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube4" type="MeshInstance3D" parent="Curb 1"]
+[node name="Cube4" type="MeshInstance3D" parent="Road/Curb 1"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -1.08824)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube3" type="MeshInstance3D" parent="Curb 1"]
+[node name="Cube3" type="MeshInstance3D" parent="Road/Curb 1"]
 transform = Transform3D(0.118, 0, 0, 0, 0.078, 0, 0, 0, 0.5, -4.135, 0.077, -0.0964064)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
 skin = SubResource("Skin_yh3tc")
 skeleton = NodePath("")
 
-[node name="Cube2" type="MeshInstance3D" parent="Curb 1"]
+[node name="Cube2" type="MeshInstance3D" parent="Road/Curb 1"]
 transform = Transform3D(0.117861, 0, 0, 0, 0.0782349, 0, 0, 0, 0.5, -4.135, 0.077, 0.9)
 material_override = SubResource("StandardMaterial3D_bmq0p")
 mesh = SubResource("ArrayMesh_jlgq7")
