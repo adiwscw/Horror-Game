@@ -6,4 +6,3 @@ func _input(event):
 	if event.is_action_pressed("Start"):
 		hide()  
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-  

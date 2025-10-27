@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://h74qx0flisn3"]
+[gd_scene load_steps=54 format=3 uid="uid://h74qx0flisn3"]
 
 [ext_resource type="Script" path="res://RigidBody3D.gd" id="1_2jktg"]
 [ext_resource type="Script" path="res://Space_Play_Text.gd" id="1_fkxpu"]
@@ -14,7 +14,11 @@
 [ext_resource type="Script" path="res://paper_slide_animation.gd" id="10_lrjav"]
 [ext_resource type="PackedScene" uid="uid://5i6cyexe0ivw" path="res://Assets/Boss.blend" id="13_hep4i"]
 [ext_resource type="Script" path="res://Paper Slide.gd" id="13_yuulw"]
+[ext_resource type="Script" path="res://play_button.gd" id="14_0r7np"]
+[ext_resource type="Script" path="res://Play Button.gd" id="14_pomgq"]
 [ext_resource type="FontFile" uid="uid://bpyq2cjart6ql" path="res://Assets/ShadowsIntoLightTwo-Regular.ttf" id="15_fo0rk"]
+[ext_resource type="Script" path="res://Settings Button.gd" id="15_i7c5t"]
+[ext_resource type="Script" path="res://Credits Button.gd" id="16_ictqg"]
 
 [sub_resource type="Theme" id="Theme_ujv3o"]
 
@@ -194,9 +198,6 @@ albedo_texture = ExtResource("9_aje5j")
 [sub_resource type="BoxMesh" id="BoxMesh_0rggk"]
 size = Vector3(0.4, 0, 0.5)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_sc6vb"]
-viewport_path = NodePath("SubViewport")
-
 [sub_resource type="Animation" id="Animation_ugb27"]
 resource_name = "Paper Slide"
 length = 5.5
@@ -264,6 +265,9 @@ _data = {
 "Paper Slide": SubResource("Animation_ugb27"),
 "RESET": SubResource("Animation_wkur3")
 }
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sc6vb"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="LabelSettings" id="LabelSettings_dqh56"]
 font = ExtResource("15_fo0rk")
@@ -419,7 +423,7 @@ mesh = SubResource("CapsuleMesh_avua6")
 shape = SubResource("CapsuleShape3D_h3d42")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, 0, 1.54825, -0.831885)
+transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, 0, 1.67047, -0.831966)
 fov = 72.0
 
 [node name="Window wall blend" type="Node3D" parent="."]
@@ -476,15 +480,43 @@ mesh = SubResource("BoxMesh_0rggk")
 skeleton = NodePath("../..")
 script = ExtResource("10_lrjav")
 
-[node name="Sprite3D" type="Sprite3D" parent="Paper/paper"]
-transform = Transform3D(-0.3, -4.52987e-08, -1.98007e-15, 0, -1.31134e-08, 0.3, -4.52987e-08, 0.3, 1.31134e-08, -0.180717, 0.000830054, -0.537243)
-texture = SubResource("ViewportTexture_sc6vb")
-
 [node name="Paper Slide" type="AnimationPlayer" parent="Paper/paper"]
 libraries = {
 "": SubResource("AnimationLibrary_h4456")
 }
 script = ExtResource("13_yuulw")
+
+[node name="Sprite3D" type="Sprite3D" parent="Paper/paper"]
+transform = Transform3D(-0.3, -4.52987e-08, -1.98007e-15, 0, -1.31134e-08, 0.3, -4.52987e-08, 0.3, 1.31134e-08, -0.180717, 0.000830054, -0.537243)
+texture = SubResource("ViewportTexture_sc6vb")
+
+[node name="Play Button" type="Button" parent="Paper/paper"]
+offset_left = 655.0
+offset_top = 236.0
+offset_right = 846.0
+offset_bottom = 366.0
+script = ExtResource("14_pomgq")
+
+[node name="Settings Button" type="Button" parent="Paper/paper"]
+offset_left = 654.0
+offset_top = 395.0
+offset_right = 947.0
+offset_bottom = 525.0
+script = ExtResource("15_i7c5t")
+
+[node name="Credits Button" type="Button" parent="Paper/paper"]
+offset_left = 628.0
+offset_top = 550.0
+offset_right = 921.0
+offset_bottom = 680.0
+script = ExtResource("16_ictqg")
+
+[node name="Leave Button" type="Button" parent="Paper/paper"]
+offset_left = 619.0
+offset_top = 725.0
+offset_right = 875.0
+offset_bottom = 855.0
+script = ExtResource("14_0r7np")
 
 [node name="Boss" parent="." instance=ExtResource("13_hep4i")]
 transform = Transform3D(-1.74846e-08, 0, -0.4, 0, 0.4, 0, 0.4, 0, -1.74846e-08, 1.41566, 0.119441, 0.636677)
